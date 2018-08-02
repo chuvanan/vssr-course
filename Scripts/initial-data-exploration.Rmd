@@ -1,3 +1,12 @@
+---
+title: "EDA with R"
+output: 
+    html_document:
+        theme: readable
+---
+
+
+```{r}
 
 library(tidyr)
 library(dplyr)
@@ -11,7 +20,7 @@ read_csv <- readr::read_csv
 
 # Import data -------------------------------------------------------------
 
-df_base <- read_csv("Day 1/Dataset references/MonthlyRainfall_mm_ByProvince.csv")
+df_base <- read_csv("../Day 1/Dataset references/MonthlyRainfall_mm_ByProvince.csv")
 
 head(df_base)
 dim(df_base)
@@ -144,16 +153,7 @@ scatter_plot(df_clean, May, July, "Comparison of Rainfall in May and July")
 scatter_plot(df_clean, May, Aug., "Comparison of Rainfall in May and August")
 scatter_plot(df_clean, May, Sep., "Comparison of Rainfall in May and September")
 
+# -------------------------------------------------------------------------
 
-
-
-
-
-
-
-
-
-
-
-
+```
 
