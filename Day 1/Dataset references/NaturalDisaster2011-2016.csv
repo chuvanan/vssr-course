@@ -1,0 +1,9 @@
+﻿"Natural disaster damage by Year and Type"
+
+"Year";"Human losses (Person) - Number of deaths and missing";"Human losses (Person) - Number of injured";"House damage (House) - Number of collaped and swept away houses";"House damage (House) - Number of flooded, damaged and roof ripped-off houses";"Agricultural damage (Ha) - Damaged paddy areas";"Agricultural damage (Ha) - Damaged vegetable areas";"Total disaster damage in money (Bill. dongs)"
+"2011";257;267;1152;391806;241165;89341;10125
+"2012";269;440;2776;112184;181516;115408;13374
+"2013";313;1150;6518;694619;114844;155708;29601
+"2014";145;165;1936;51342;128085;43809;2542
+"2015";157;199;1088;30953;56894;26753;5362
+"Pre. 2016(*)";264;431;5431;364997;527743;150459;39726
