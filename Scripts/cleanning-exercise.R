@@ -16,3 +16,8 @@ dta$Nov[dta$Nov == "low"] <- NA
 dta$Nov <- as.numeric(dta$Nov)
 dta$Nov <- abs(dta$Nov)
 
+for (i in 1:nrow(dta)) {
+    if (is.na(dta$Year[i])) {
+        dta$Year[i] <- dta$Year[i - 1]
+    }
+}
