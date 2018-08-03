@@ -1,49 +1,49 @@
-region,year,income
-Red River Delta,2010,4680
-Northern midlands and mountain areas,2010,2820
-Northern Central area and Central coastal area,2010,3170
-Central Highlands,2010,3050
-South East,2010,7200
-Mekong River Delta,2010,3950
-Red River Delta,2010,37440
-Northern midlands and mountain areas,2010,21370
-Northern Central area and Central coastal area,2010,22830
-Central Highlands,2010,25260
-South East,2010,55730
-Mekong River Delta,2010,29080
-Red River Delta,2012,7e3
-Northern midlands and mountain areas,2012,3770
-Northern Central area and Central coastal area,2012,4430
-Central Highlands,2012,4210
-South East,2012,10540
-Mekong River Delta,2012,5450
-Red River Delta,2012,53840
-Northern midlands and mountain areas,2012,29430
-Northern Central area and Central coastal area,2012,33550
-Central Highlands,2012,36260
-South East,2012,73610
-Mekong River Delta,2012,42140
-Red River Delta,2014,10070
-Northern midlands and mountain areas,2014,4680
-Northern Central area and Central coastal area,2014,5610
-Central Highlands,2014,5100
-South East,2014,13970
-Mekong River Delta,2014,7280
-Red River Delta,2014,78580
-Northern midlands and mountain areas,2014,38060
-Northern Central area and Central coastal area,2014,44e3
-Central Highlands,2014,45740
-South East,2014,99790
-Mekong River Delta,2014,54200
-Red River Delta,2016,12160
-Northern midlands and mountain areas,2016,5500
-Northern Central area and Central coastal area,2016,6810
-Central Highlands,2016,6250
-South East,2016,17350
-Mekong River Delta,2016,8610
-Red River Delta,2016,95610
-Northern midlands and mountain areas,2016,47630
-Northern Central area and Central coastal area,2016,53050
-Central Highlands,2016,57560
-South East,2016,120080
-Mekong River Delta,2016,65580
+region,quintile,year,income
+Red River Delta,lowest,2010,4680
+Northern midlands and mountain areas,lowest,2010,2820
+Northern Central area and Central coastal area,lowest,2010,3170
+Central Highlands,lowest,2010,3050
+South East,lowest,2010,7200
+Mekong River Delta,lowest,2010,3950
+Red River Delta,highest,2010,37440
+Northern midlands and mountain areas,highest,2010,21370
+Northern Central area and Central coastal area,highest,2010,22830
+Central Highlands,highest,2010,25260
+South East,highest,2010,55730
+Mekong River Delta,highest,2010,29080
+Red River Delta,lowest,2012,7e3
+Northern midlands and mountain areas,lowest,2012,3770
+Northern Central area and Central coastal area,lowest,2012,4430
+Central Highlands,lowest,2012,4210
+South East,lowest,2012,10540
+Mekong River Delta,lowest,2012,5450
+Red River Delta,highest,2012,53840
+Northern midlands and mountain areas,highest,2012,29430
+Northern Central area and Central coastal area,highest,2012,33550
+Central Highlands,highest,2012,36260
+South East,highest,2012,73610
+Mekong River Delta,highest,2012,42140
+Red River Delta,lowest,2014,10070
+Northern midlands and mountain areas,lowest,2014,4680
+Northern Central area and Central coastal area,lowest,2014,5610
+Central Highlands,lowest,2014,5100
+South East,lowest,2014,13970
+Mekong River Delta,lowest,2014,7280
+Red River Delta,highest,2014,78580
+Northern midlands and mountain areas,highest,2014,38060
+Northern Central area and Central coastal area,highest,2014,44e3
+Central Highlands,highest,2014,45740
+South East,highest,2014,99790
+Mekong River Delta,highest,2014,54200
+Red River Delta,lowest,2016,12160
+Northern midlands and mountain areas,lowest,2016,5500
+Northern Central area and Central coastal area,lowest,2016,6810
+Central Highlands,lowest,2016,6250
+South East,lowest,2016,17350
+Mekong River Delta,lowest,2016,8610
+Red River Delta,highest,2016,95610
+Northern midlands and mountain areas,highest,2016,47630
+Northern Central area and Central coastal area,highest,2016,53050
+Central Highlands,highest,2016,57560
+South East,highest,2016,120080
+Mekong River Delta,highest,2016,65580
