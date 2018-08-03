@@ -1,4 +1,6 @@
 
+library(tidyr)
+library(ggplot2)
 
 read_csv <- readr::read_csv
 
@@ -21,3 +23,21 @@ for (i in 1:nrow(dta)) {
         dta$Year[i] <- dta$Year[i - 1]
     }
 }
+
+tidy_dta <- dta %>%
+    gather(key = "Month", value = "Rainfall", -Year, -Province)
+
+head(tidy_dta)
+
+tidy_dta %>%
+    spread(Year, Rainfall) %>%
+    ggplot(aes(`2005`, `2006`)) +
+    geom_point() +
+    geom_smooth(method = "lm", se = FALSE) +
+    facet_wrap(~ Province, scales = "free")
+
+ggplot(tidy_dta, aes(Month, Rainfall, fill = factor(Year))) +
+    geom_col(position = "stack") +
+    facet_wrap(~ Province)
+
+
