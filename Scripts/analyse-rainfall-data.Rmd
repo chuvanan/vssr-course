@@ -1,0 +1,21 @@
+---
+output: html_document
+---
+
+<style>
+
+body .main-container {
+  max-width: 100%;
+  margin: auto;
+}   
+
+</style>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r, out.width="100%"}
+knitr::include_graphics("rainfall.png")
+```
+

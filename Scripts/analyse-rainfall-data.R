@@ -2,6 +2,8 @@
 library(tidyr)
 library(dplyr)
 library(ggplot2)
+library(ggridges)
+library(forcats)
 
 read_csv <- readr::read_csv
 str_to_title <- stringr::str_to_title
@@ -49,27 +51,61 @@ tidy_dta <- tidy_dta %>%
            mean_rainfall = mean(rainfall), na.rm = TRUE) %>%
     ungroup()
 
+province_list <- c("Lai Chau", "Son La", "Tuyen Quang",
+                   "Bai Chay", "Ha Noi", "Nam Dinh",
+                   "Vinh", "Hue", "Da Nang", "Qui Nhon", "Nha Trang",
+                   "Playku", "Da Lat", "Vung Tau", "Ca Mau")
 
-ggplot(tidy_dta) +
-    geom_ribbon(aes(month_num,
-                    ymin = min_rainfall, ymax = max_rainfall),
-                fill = "steelblue", alpha = 0.3) +
-    geom_line(aes(month_num, max_rainfall), color = "steelblue") +
-    geom_line(aes(month_num, min_rainfall), color = "steelblue") +
-    geom_line(aes(month_num, mean_rainfall),
-              color = "red4", size = 0.9) +
-    facet_wrap(~ region) +
-    scale_x_continuous(breaks = 5:11,
-                       labels = c("May", "Jun", "Jul", "Aug",
-                                  "Sep", "Oct", "Nov")) +
-    labs(x = NULL, y = "Rainfall (mm)") +
-    theme_minimal(base_family = "Roboto") +
-    theme(strip.text = element_text(face = "bold", size = 10),
-          panel.grid.minor.y = element_blank(),
-          panel.grid.minor.x = element_blank())
+tidy_dta <- tidy_dta %>%
+    mutate(province = factor(province, levels = province_list))
+
+# ggplot(tidy_dta) +
+#     geom_ribbon(aes(month_num,
+#                     ymin = min_rainfall, ymax = max_rainfall),
+#                 fill = "steelblue", alpha = 0.3) +
+#     geom_line(aes(month_num, max_rainfall), color = "steelblue") +
+#     geom_line(aes(month_num, min_rainfall), color = "steelblue") +
+#     geom_line(aes(month_num, mean_rainfall), color = "red4", size = 0.9) +
+#     facet_wrap(~ region) +
+#     scale_x_continuous(breaks = 5:11,
+#                        labels = c("May", "Jun", "Jul", "Aug",
+#                                   "Sep", "Oct", "Nov")) +
+#     labs(x = NULL, y = "Rainfall (mm)") +
+#     theme_minimal(base_family = "Roboto Slab", base_size = 12) +
+#     theme(strip.text = element_text(face = "bold", size = 10),
+#           panel.grid.minor.y = element_blank(),
+#           panel.grid.minor.x = element_blank())
 
 
+my_theme <- function() {
+    theme(panel.grid.major.y = element_blank(),
+          axis.ticks = element_blank(),
+          strip.background = element_blank(),
+          strip.text = element_text(face = "bold", hjust = 0, family = "Carlito", size = 14),
+          axis.text = element_text(size = 12, color = "gray30"),
+          axis.title.x = element_text(hjust = 0.5, color = "gray20"),
+          plot.caption = element_text(color = "gray30"),
+          plot.title = element_text(size = 24, vjust = 8),
+          plot.subtitle = element_text(size = 14, color = "gray30", vjust = 6),
+          plot.background = element_rect(fill = "gray97", color = "gray97"),
+          panel.spacing.y = unit(1, "lines"),
+          panel.spacing.x = unit(0, "lines"),
+          plot.margin = unit(c(1.5, 0.5, 0.5, 0.5), "cm"),
+          legend.position = "top",
+          legend.title = element_blank(),
+          legend.direction = "horizontal")
+}
 
-
-
+ggplot(tidy_dta, aes(rainfall, fct_rev(month_fct))) +
+    geom_density_ridges(aes(fill = region), color = "gray80") +
+    scale_fill_cyclical(values = c("#afa83a", "#7f63b8", "#56ae6c",
+                                   "#b84c7d", "#ac873f", "#ba4e3d")) +
+    labs(x = "Rainfall (mm)", y = NULL,
+         caption = "Data Source: GSO",
+         title = "Comparision of Rainfall Across Regions in Vietnam",
+         subtitle = "The data show the density distribution of rainfall in selected provinces from 2006 to 2016") +
+    theme_ridges(font_family = "Carlito") +
+    facet_wrap(~ province, nrow = 3) +
+    my_theme() +
+    guides(fill = guide_legend(nrow = 1))
 
