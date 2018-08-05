@@ -3,6 +3,7 @@ library(tidyr)
 library(dplyr)
 read_csv2 <- readr::read_csv2
 write_csv <- readr::write_csv
+str_extract_all <- stringr::str_extract_all
 
 dta <- read_csv2("Day 1/Dataset references/HighLowIncomeQuintile2010-2016.csv",
                  skip = 2)
@@ -12,6 +13,12 @@ names(dta) <- c("province",
                 "lowest_income_quintile_2012", "highest_income_quintile_2012", "income_ratio_2012",
                 "lowest_income_quintile_2014", "highest_income_quintile_2014", "income_ratio_2014",
                 "lowest_income_quintile_2016", "highest_income_quintile_2016", "income_ratio_2016")
+
+# for unknown reason, read_csv2() failed to parse period-separator in the data
+dta$income_ratio_2010 <- dta$income_ratio_2010 / 10
+dta$income_ratio_2012 <- dta$income_ratio_2012 /10
+dta$income_ratio_2014 <- dta$income_ratio_2014 / 10
+dta$income_ratio_2016 <- dta$income_ratio_2016 / 10
 
 region_list <- c("Red River Delta", "Northern midlands and mountain areas",
                  "Northern Central area and Central coastal area", "Central Highlands",
@@ -48,3 +55,46 @@ provinces <- provinces %>%
 
 write_csv(provinces, "Day 1/province_quintiles.csv")
 write_csv(regions, "Day 1/region_quintiles.csv")
+
+
+# tidy up -----------------------------------------------------------------
+
+province_dta <- provinces
+region_dta <- regions
+
+province_income_ratio <- province_dta %>%
+    select(region, province, contains("ratio")) %>%
+    gather(key = "year", value = "ratio", -region, -province) %>%
+    mutate(year = as.numeric(gsub("income_ratio_", "", year)))
+
+region_income_ratio <- region_dta %>%
+    select(region, contains("ratio")) %>%
+    gather(key = "year", value = "ratio", -region) %>%
+    mutate(year = as.numeric(gsub("income_ratio_", "", year)))
+
+province_income_quintile <- province_dta %>%
+    select(region, province, contains("quintile")) %>%
+    gather(key = "year", value = "income", -region, -province) %>%
+    mutate(quintile = unlist(str_extract_all(year, ".*quintile"))) %>%
+    mutate(quintile = case_when(
+               grepl("lowest", quintile) ~ "lowest",
+               grepl("highest", quintile) ~ "highest"
+           )) %>%
+    mutate(year = as.numeric(gsub(".*_income_quintile_", "", year))) %>%
+    select(region, province, quintile, year, income)
+
+region_income_quintile <- region_dta %>%
+    select(region, contains("quintile")) %>%
+    gather(key = "year", value = "income", -region) %>%
+    mutate(quintile = unlist(str_extract_all(year, ".*quintile"))) %>%
+    mutate(quintile = case_when(
+               grepl("lowest", quintile) ~ "lowest",
+               grepl("highest", quintile) ~ "highest"
+           )) %>%
+    mutate(year = as.numeric(gsub(".*_income_quintile_", "", year))) %>%
+    select(region, quintile, year, income)
+
+write_csv(province_income_ratio, "Day 1/province_income_ratio.csv")
+write_csv(region_income_ratio, "Day 1/region_income_ratio.csv")
+write_csv(province_income_quintile, "Day 1/province_income_quintile.csv")
+write_csv(region_income_quintile, "Day 1/region_income_quintile.csv")
